@@ -1,8 +1,10 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Code, Database, Globe, Shield } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const Skills = () => {
+  const { ref, isVisible } = useScrollAnimation();
   const skillCategories = [
     {
       title: "Programming & Database",
@@ -55,10 +57,14 @@ const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="py-20 bg-muted/30">
+    <section id="skills" className="py-20 bg-muted/20" ref={ref}>
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto space-y-8">
-          <div className="text-center space-y-2">
+          <div 
+            className={`text-center space-y-2 transition-all duration-700 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+          >
             <h2 className="text-3xl md:text-4xl font-bold">Technical Skills</h2>
             <p className="text-muted-foreground">Comprehensive technology stack and expertise</p>
           </div>
@@ -67,7 +73,10 @@ const Skills = () => {
             {skillCategories.map((category, index) => (
               <Card 
                 key={index} 
-                className="p-6 shadow-elegant hover:shadow-glow transition-smooth hover:scale-[1.02]"
+                className={`p-6 shadow-elegant hover:shadow-glow transition-all duration-500 hover:scale-[1.02] hover:border-primary/50 ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                }`}
+                style={{ transitionDelay: `${0.1 + index * 0.15}s` }}
               >
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">

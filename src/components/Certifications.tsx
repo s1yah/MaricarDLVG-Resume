@@ -1,8 +1,10 @@
 import { Award, BookOpen } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const Certifications = () => {
+  const { ref, isVisible } = useScrollAnimation();
   const certifications = [
     {
       name: "IT Specialist – Databases",
@@ -24,17 +26,26 @@ const Certifications = () => {
   ];
 
   return (
-    <section id="certifications" className="py-20">
+    <section id="certifications" className="py-20" ref={ref}>
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto space-y-8">
-          <div className="text-center space-y-2">
+          <div 
+            className={`text-center space-y-2 transition-all duration-700 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+          >
             <h2 className="text-3xl md:text-4xl font-bold">Certifications</h2>
             <p className="text-muted-foreground">Professional credentials and completed courses</p>
           </div>
           
           <div className="space-y-6">
             {/* Professional Certifications */}
-            <Card className="p-6 shadow-elegant">
+            <Card 
+              className={`p-6 shadow-elegant hover:shadow-glow transition-all duration-500 hover:border-primary/50 ${
+                isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+              }`}
+              style={{ transitionDelay: '0.2s' }}
+            >
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-lg gradient-primary flex items-center justify-center">
@@ -59,7 +70,12 @@ const Certifications = () => {
             </Card>
             
             {/* Course Completions */}
-            <Card className="p-6 shadow-elegant">
+            <Card 
+              className={`p-6 shadow-elegant hover:shadow-glow transition-all duration-500 hover:border-primary/50 ${
+                isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+              }`}
+              style={{ transitionDelay: '0.4s' }}
+            >
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-lg gradient-primary flex items-center justify-center">
